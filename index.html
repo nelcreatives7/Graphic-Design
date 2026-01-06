@@ -9,18 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Wallpoet&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Rugged Brown Theme Color Palette */
-            --primary-dark: #3C2A21;   /* Deep Brown */
-            --primary: #5C4033;        /* Rich Brown */
-            --primary-light: #8B7355;  /* Warm Tan */
+            /* Enhanced Color Palette */
+            --primary-dark: #2A1B17;   /* Deeper, richer brown */
+            --primary: #4A3429;        /* Modern brown */
+            --primary-light: #7A6355;  /* Warm medium brown */
             --accent: #D4A574;         /* Earthy Gold */
-            --accent-light: #E7D4B5;   /* Cream */
-            --light: #F8F4E9;          /* Off-White */
-            --gray: #6c757d;
-            --gray-light: #e9ecef;
-            --transition: all 0.3s ease;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --radius: 8px;
+            --accent-light: #F0E2CC;   /* Softer cream */
+            --light: #F9F5F0;          /* Warmer off-white */
+            --gray: #8A7F78;
+            --gray-light: #EFEAE5;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-sm: 8px;
         }
 
         * {
@@ -124,23 +126,23 @@
             color: white;
         }
 
-        /* Header & Navigation */
+        /* ==================== ENHANCED HEADER ==================== */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(248, 244, 233, 0.98);
+            background: rgba(248, 244, 233, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 15px rgba(60, 42, 33, 0.08);
             z-index: 1000;
-            padding: 18px 0;
+            padding: 0;
             transition: var(--transition);
             border-bottom: 2px solid var(--accent);
         }
 
         header.scrolled {
-            padding: 12px 0;
+            padding: 0;
             box-shadow: 0 8px 25px rgba(60, 42, 33, 0.12);
         }
 
@@ -148,38 +150,94 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 80px;
         }
 
-        /* Updated Logo Styling using Wallpoet font */
-        .logo {
-            font-family: 'Wallpoet', cursive;
-            font-weight: 400;
-            font-size: 2.4rem;
-            color: var(--primary-dark);
-            text-decoration: none;
-            letter-spacing: 1.5px;
+        /* Enhanced Logo */
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            text-decoration: none;
             transition: var(--transition);
         }
 
-        .logo:hover {
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(74, 52, 41, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .logo-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-brand {
+            font-family: 'Wallpoet', cursive;
+            font-weight: 400;
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            letter-spacing: 1.5px;
+            transition: var(--transition);
+        }
+
+        .logo-tagline {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
             color: var(--accent);
-            transform: scale(1.05);
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            margin-top: 3px;
+            text-transform: uppercase;
         }
 
-        .logo img {
-            display: none;
+        .logo-container:hover .logo-icon {
+            transform: rotate(-5deg) scale(1.05);
+            box-shadow: 0 6px 20px rgba(74, 52, 41, 0.3);
         }
 
+        .logo-container:hover .logo-brand {
+            color: var(--accent);
+        }
+
+        /* Enhanced Navigation */
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 30px;
         }
 
         .nav-links li {
-            margin-left: 30px;
+            position: relative;
         }
 
         .nav-links a {
@@ -188,13 +246,15 @@
             font-weight: 500;
             transition: var(--transition);
             font-size: 1rem;
+            padding: 8px 0;
             position: relative;
+            display: inline-block;
         }
 
         .nav-links a:after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -210,6 +270,16 @@
             width: 100%;
         }
 
+        .nav-links a.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .nav-links a.active:after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -218,11 +288,93 @@
             color: var(--primary-dark);
             cursor: pointer;
             transition: var(--transition);
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray-light);
         }
 
         .mobile-menu-btn:hover {
             color: var(--accent);
+            background-color: var(--accent-light);
             transform: scale(1.1);
+        }
+
+        /* Enhanced Mobile Menu */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background-color: var(--light);
+                flex-direction: column;
+                padding: 100px 40px 40px;
+                box-shadow: -10px 0 30px rgba(60, 42, 33, 0.1);
+                transition: var(--transition);
+                z-index: 1000;
+                gap: 0;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+                opacity: 0;
+                transform: translateX(20px);
+                transition: var(--transition);
+            }
+            
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
+            .nav-links.active li:nth-child(5) { transition-delay: 0.5s; }
+            
+            .nav-links a {
+                font-size: 1.2rem;
+                padding: 12px 0;
+                display: block;
+                border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+            }
+            
+            .nav-links a:after {
+                display: none;
+            }
+            
+            /* Overlay */
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(60, 42, 33, 0.7);
+                backdrop-filter: blur(5px);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
         }
 
         /* Hero Section */
@@ -336,6 +488,25 @@
             box-shadow: var(--shadow);
             border-top: 4px solid transparent;
             border: 1px solid var(--accent-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .service-card:hover:before {
+            transform: scaleX(1);
         }
 
         .service-card:hover {
@@ -646,86 +817,168 @@
             outline: none;
             border-color: var(--accent);
         }
+/* ================= FOOTER ================= */
+footer {
+    background-color: var(--primary-dark);
+    color: var(--light);
+    padding: 60px 0 30px;
+}
 
-        /* Footer */
-        footer {
-            background-color: var(--primary-dark);
-            color: var(--light);
-            padding: 60px 0 30px;
-        }
+/* Layout */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
+.footer-col {
+    flex: 1 1 220px;
+    max-width: 300px;
+}
 
-        .footer-col {
-            flex: 1;
-            min-width: 250px;
-        }
+/* Headings */
+.footer-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+    color: var(--accent);
+}
 
-        .footer-col h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
+/* Text */
+.footer-col p {
+    opacity: 0.8;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
 
-        .footer-logo {
-            font-family: 'Wallpoet', cursive;
-            font-weight: 400;
-            font-size: 2.2rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            text-decoration: none;
-            display: block;
-        }
+/* Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
 
-        .footer-logo:hover {
-            transform: scale(1.05);
-            color: var(--light);
-        }
+.footer-links li {
+    margin-bottom: 10px;
+}
 
-        .footer-logo span {
-            color: var(--accent);
-        }
+.footer-links a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s ease;
+}
 
-        .footer-col p {
-            opacity: 0.8;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+.footer-links a:hover {
+    color: var(--accent);
+    transform: translateX(5px);
+}
 
-        .footer-links {
-            list-style: none;
-        }
+/* ============ FOOTER LOGO ============ */
+footer .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
 
-        .footer-links li {
-            margin-bottom: 10px;
-        }
+footer .logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--accent), var(--primary-light));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(212, 165, 116, 0.35);
+    transition: 0.3s ease;
+}
 
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-        }
+footer .logo-icon i {
+    color: #fff;
+    font-size: 1.4rem;
+}
 
-        .footer-links a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
+footer .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
 
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(212, 165, 116, 0.2);
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
+footer .logo-brand {
+    font-family: 'Wallpoet', cursive;
+    font-size: 1.9rem;
+    letter-spacing: 1.3px;
+    color: var(--accent);
+}
+
+footer .logo-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 1.3px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+/* Hover Effect */
+footer .logo-container:hover .logo-icon {
+    transform: rotate(-4deg) scale(1.05);
+}
+
+footer .logo-container:hover .logo-brand {
+    color: #fff;
+}
+
+/* Copyright */
+.copyright {
+    text-align: center;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* ============ MOBILE VIEW ============ */
+@media (max-width: 768px) {
+    footer {
+        padding: 45px 0 25px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 35px;
+    }
+
+    .footer-col {
+        max-width: 100%;
+    }
+
+    footer .logo-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    footer .logo-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    footer .logo-brand {
+        font-size: 1.6rem;
+    }
+
+    footer .logo-tagline {
+        font-size: 0.6rem;
+    }
+
+    .footer-links a:hover {
+        transform: none;
+    }
+}
 
        /* WhatsApp Floating Button */
 #whatsapp-button {
@@ -804,28 +1057,30 @@
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
+                position: fixed;
+                top: 0;
+                right: -100%;
                 width: 100%;
+                height: 100vh;
                 background-color: var(--light);
                 flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(60, 42, 33, 0.1);
-                border-top: 1px solid var(--accent-light);
+                padding: 100px 40px 40px;
+                box-shadow: -10px 0 30px rgba(60, 42, 33, 0.15);
+                transition: var(--transition);
+                z-index: 1000;
+                gap: 0;
             }
             
             .nav-links.active {
-                display: flex;
+                right: 0;
             }
             
             .nav-links li {
-                margin: 10px 0;
+                margin: 15px 0;
             }
             
             .mobile-menu-btn {
-                display: block;
+                display: flex;
             }
             
             .hero {
@@ -872,6 +1127,28 @@
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .logo-brand {
+                font-size: 1.8rem;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-icon i {
+                font-size: 1.2rem;
+            }
+            
+            footer .logo-brand {
+                font-size: 1.8rem;
+            }
+            
+            footer .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -889,22 +1166,39 @@
   </a>
 </div>
 
-    <!-- Header & Navigation -->
-    <header id="header">
-        <div class="container nav-container">
-            <a href="#" class="logo">NelCreatives</a>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </header>
+   <!-- Enhanced Header & Navigation -->
+<header id="header">
+  <div class="container nav-container">
+    <!-- Enhanced Logo with Icon -->
+    <a href="#home" class="logo-container">
+      <div class="logo-icon">
+        <i class="fa-solid fa-palette"></i>
+      </div>
+      <div class="logo-text">
+        <span class="logo-brand">NelCreatives</span>
+        <span class="logo-tagline">Graphic Design Studio</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+  </div>
+</header>
+
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1040,14 +1334,6 @@
                     <span class="tool-name">Figma</span>
                 </div>
 
-              <!-- CorelDRAW -->
-<div class="tool-item">
-    <div class="tool-icon">
-                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@9/icons/coreldraw.svg" alt="CorelDRAW">
-                    </div>
-                    <span class="tool-name">CorelDRAW</span>
-                </div>
-
                 <!-- Canva -->
                 <div class="tool-item">
                     <div class="tool-icon">
@@ -1083,17 +1369,17 @@
         <!-- Portfolio Grid -->
         <div class="portfolio-grid">
 
-            <!-- ================= POSTERS ================= -->
+            <!-- ================= POSTERS (4 Items) ================= -->
             <div class="portfolio-item" data-category="poster">
-                <img src="https://img.freepik.com/free-psd/music-festival-poster-template_23-2148893812.jpg" alt="Music Poster" class="portfolio-img">
+                <img src="https://img.freepik.com/free-psd/music-festival-poster-template_23-2148893812.jpg" alt="Music Festival Poster" class="portfolio-img">
                 <div class="portfolio-overlay">
                     <h4>Music Festival Poster</h4>
-                    <p>Bold entertainment poster design</p>
+                    <p>Vibrant entertainment design</p>
                 </div>
             </div>
 
             <div class="portfolio-item" data-category="poster">
-                <img src="https://img.freepik.com/free-psd/art-exhibition-poster-template_23-2148689441.jpg" alt="Art Poster" class="portfolio-img">
+                <img src="https://img.freepik.com/free-psd/art-exhibition-poster-template_23-2148689441.jpg" alt="Art Exhibition Poster" class="portfolio-img">
                 <div class="portfolio-overlay">
                     <h4>Art Exhibition Poster</h4>
                     <p>Minimalist creative artwork</p>
@@ -1101,16 +1387,24 @@
             </div>
 
             <div class="portfolio-item" data-category="poster">
-                <img src="https://img.freepik.com/free-psd/church-event-poster-template_23-2148904301.jpg" alt="Church Poster" class="portfolio-img">
+                <img src="https://img.freepik.com/free-psd/church-event-poster-template_23-2148904301.jpg" alt="Church Event Poster" class="portfolio-img">
                 <div class="portfolio-overlay">
-                    <h4>Church Event Poster</h4>
+                    <h4>Community Event Poster</h4>
                     <p>Faith-based event promotion</p>
                 </div>
             </div>
 
-            <!-- ================= FLYERS ================= -->
+            <div class="portfolio-item" data-category="poster">
+                <img src="https://img.freepik.com/free-psd/summer-party-poster-template_23-2148904299.jpg" alt="Summer Party Poster" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h4>Summer Concert Poster</h4>
+                    <p>Colorful event promotion</p>
+                </div>
+            </div>
+
+            <!-- ================= FLYERS (4 Items) ================= -->
             <div class="portfolio-item" data-category="flyer">
-                <img src="https://img.freepik.com/free-psd/business-conference-flyer-template_23-2148606225.jpg" alt="Business Flyer" class="portfolio-img">
+                <img src="https://img.freepik.com/free-psd/business-conference-flyer-template_23-2148606225.jpg" alt="Business Conference Flyer" class="portfolio-img">
                 <div class="portfolio-overlay">
                     <h4>Business Conference Flyer</h4>
                     <p>Corporate flyer layout</p>
@@ -1118,10 +1412,10 @@
             </div>
 
             <div class="portfolio-item" data-category="flyer">
-                <img src="https://img.freepik.com/free-psd/product-launch-flyer-template_23-2148587046.jpg" alt="Launch Flyer" class="portfolio-img">
+                <img src="https://img.freepik.com/free-psd/product-launch-flyer-template_23-2148587046.jpg" alt="Product Launch Flyer" class="portfolio-img">
                 <div class="portfolio-overlay">
                     <h4>Product Launch Flyer</h4>
-                    <p>Marketing campaign flyer</p>
+                    <p>Marketing campaign design</p>
                 </div>
             </div>
 
@@ -1133,7 +1427,15 @@
                 </div>
             </div>
 
-            <!-- ================= BRANDING ================= -->
+            <div class="portfolio-item" data-category="flyer">
+                <img src="https://img.freepik.com/free-psd/restaurant-food-flyer-template_23-2148608319.jpg" alt="Restaurant Flyer" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h4>Restaurant Menu Flyer</h4>
+                    <p>Appetizing food promotion</p>
+                </div>
+            </div>
+
+            <!-- ================= BRANDING (4 Items) ================= -->
             <div class="portfolio-item" data-category="branding">
                 <img src="https://img.freepik.com/free-vector/coffee-branding-mockup_52683-27130.jpg" alt="Coffee Branding" class="portfolio-img">
                 <div class="portfolio-overlay">
@@ -1146,7 +1448,7 @@
                 <img src="https://img.freepik.com/free-vector/restaurant-branding-mockup_52683-29829.jpg" alt="Restaurant Branding" class="portfolio-img">
                 <div class="portfolio-overlay">
                     <h4>Restaurant Branding</h4>
-                    <p>Visual brand identity</p>
+                    <p>Visual brand identity suite</p>
                 </div>
             </div>
 
@@ -1154,11 +1456,19 @@
                 <img src="https://img.freepik.com/free-vector/tech-branding-mockup_52683-27637.jpg" alt="Tech Branding" class="portfolio-img">
                 <div class="portfolio-overlay">
                     <h4>Tech Startup Branding</h4>
-                    <p>Modern corporate branding</p>
+                    <p>Modern corporate identity</p>
                 </div>
             </div>
 
-            <!-- ================= SOCIAL MEDIA ================= -->
+            <div class="portfolio-item" data-category="branding">
+                <img src="https://img.freepik.com/free-psd/brand-identity-mockup_23-2148886945.jpg" alt="Corporate Branding" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h4>Corporate Brand Identity</h4>
+                    <p>Stationery & logo mockup</p>
+                </div>
+            </div>
+
+            <!-- ================= SOCIAL MEDIA (4 Items) ================= -->
             <div class="portfolio-item" data-category="social">
                 <img src="https://img.freepik.com/free-psd/social-media-post-template_23-2148886954.jpg" alt="Social Media Post" class="portfolio-img">
                 <div class="portfolio-overlay">
@@ -1183,10 +1493,17 @@
                 </div>
             </div>
 
+            <div class="portfolio-item" data-category="social">
+                <img src="https://img.freepik.com/free-psd/social-media-branding-mockup_23-2148911730.jpg" alt="Social Media Branding" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h4>Social Media Branding</h4>
+                    <p>Branded profile mockup</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
-
 
 
     <!-- Why Choose Us Section -->
@@ -1299,67 +1616,96 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <a href="#" class="footer-logo">Nel<span>Creatives</span></a>
-                    <p>A creative studio specializing in graphic design and visual branding. We transform ideas into compelling visual experiences that help brands stand out and connect with their audience.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#services">Poster Design</a></li>
-                        <li><a href="#services">Flyer Design</a></li>
-                        <li><a href="#services">Logo & Brand Identity</a></li>
-                        <li><a href="#services">Social Media Designs</a></li>
-                        <li><a href="#services">Print Materials</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-envelope" style="margin-right: 8px;"></i> nelcreatives@gmail.com</li>
-                        <li><i class="fas fa-phone" style="margin-right: 8px;"></i> +254116306863</li>
-                        <li><i class="fab fa-whatsapp" style="margin-right: 8px;"></i> +254116306863</li>
-                        <li><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i>  Nairoi, Kenya</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 NelCreatives. All Rights Reserved. | Designed by Sitefully with passion for creativity</p>
-            </div>
-        </div>
-    </footer>
+ <footer>
+    <div class="container">
 
-    <script>
-        // Mobile menu toggle
+        <div class="footer-content">
+
+            <!-- Brand Column -->
+            <div class="footer-col">
+                <a href="#home" class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-brand">NelCreatives</span>
+                        <span class="logo-tagline">Graphic Design Studio</span>
+                    </div>
+                </a>
+
+                <p>
+                    A creative studio specializing in graphic design and visual branding.
+                    We turn ideas into compelling visuals that help brands stand out.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="footer-col">
+                <h3>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#services">Poster Design</a></li>
+                    <li><a href="#services">Flyer Design</a></li>
+                    <li><a href="#services">Logo & Branding</a></li>
+                    <li><a href="#services">Social Media Design</a></li>
+                    <li><a href="#services">Print Materials</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> nelcreatives7@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> +254 116 306 863</li>
+                    <li><i class="fab fa-whatsapp"></i> +254 116 306 863</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            &copy; 2023 NelCreatives. All Rights Reserved. | Designed by Sitefully
+        </div>
+
+    </div>
+</footer>
+   <script>
+        // Enhanced Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
+        const navOverlay = document.getElementById('navOverlay');
         
-        mobileMenuBtn.addEventListener('click', () => {
+        function toggleMenu() {
+            const isActive = navLinks.classList.contains('active');
             navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
+            navOverlay.classList.toggle('active');
+            mobileMenuBtn.innerHTML = isActive ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+            document.body.style.overflow = isActive ? 'auto' : 'hidden';
+        }
         
-        // Close mobile menu when clicking a link
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+        
+        // Close menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                navOverlay.classList.remove('active');
                 mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = 'auto';
             });
         });
         
@@ -1371,6 +1717,26 @@
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            // Update active nav link based on scroll position
+            const sections = document.querySelectorAll('section');
+            const navLinksArray = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinksArray.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
         });
         
         // Portfolio filtering
@@ -1432,11 +1798,10 @@
             });
         });
 
-        // JavaScript for WhatsApp Button (optional: you can adjust position on load if needed) [citation:2]
-        document.addEventListener("DOMContentLoaded", function () {
-            var whatsappButton = document.getElementById('whatsapp-button');
-            // You can adjust position here if needed
-            // whatsappButton.style.bottom = '30px';
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trigger header scroll effect on load
+            window.dispatchEvent(new Event('scroll'));
         });
     </script>
 </body>
